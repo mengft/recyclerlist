@@ -83,18 +83,18 @@ const getItemOffset = (props, index, ref) => {
     const numColumns = props.numColumns;
     // 列表高度
     let offset = 0;
-    const sizeType = props?.itemHeight?.constructor;
+    const sizeType = props.itemHeight.constructor;
     if (sizeType === Function) {
       for (let i = 0; i < index; i++) {
         if (index % numColumns === i % numColumns) {
-          offset += props?.itemHeight({ item: props?.itemData?.[i], index: i });
+          offset += props.itemHeight({ item: props.itemData[i], index: i });
         }
       }
     } else if (sizeType === Number) {
       offset = Math.floor(index / numColumns) * props.itemSize;
     }
     // header高度
-    if (props?.layout === 'vertical' && props?.makeHeaderHeight?.constructor === Number) offset += props.makeHeaderHeight
+    if (props.layout === 'vertical' && props.makeHeaderHeight.constructor === Number) offset += props.makeHeaderHeight
     return offset;
   }
   return ref._getCountSize(props, index)
@@ -102,11 +102,11 @@ const getItemOffset = (props, index, ref) => {
 
 const getItemSize = (props, index, ref) => {
   if (!props.unlimitedSize) {
-    const sizeType = props?.itemHeight?.constructor;
+    const sizeType = props.itemHeight.constructor;
     if (sizeType === Function) {
-      return props?.itemHeight({ item: props?.itemData?.[index], index });
+      return props.itemHeight({ item: props.itemData[index], index });
     } else if (sizeType === Number) {
-      return props?.itemHeight;
+      return props.itemHeight;
     }
   }
   return ref._getSizeUpload(index, isHorizontalFunc(props))
@@ -184,7 +184,7 @@ const FixedSizeList =
     },
     getStartIndexForOffset(props, scrollOffset, ref) {
       // mengft
-      let tempItemData = [...props?.itemData];
+      let tempItemData = [...props.itemData];
       let findFirstIndex = tempItemData.findIndex((item, index) => {
         const offset = getItemOffset(props, index, ref);
         const size = getItemSize(props, index, ref);
@@ -200,7 +200,7 @@ const FixedSizeList =
         const offset = getItemOffset(props, index, ref);
         return offset >= (scrollOffset + height);
       })
-      if (findFirstIndex === -1) findFirstIndex = itemData?.length - 1;
+      if (findFirstIndex === -1) findFirstIndex = itemData.length - 1;
       return findFirstIndex;
     },
 

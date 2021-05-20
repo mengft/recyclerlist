@@ -123,7 +123,7 @@ export default function createListComponent({
         if (typeof size === 'number' && size >= 0) {
           return size
         }
-        return this.props?.itemSize || 0
+        return this.props.itemSize || 0
       }
 
       this._getSizeUploadSync = void 0
@@ -166,14 +166,14 @@ export default function createListComponent({
 
       this._getCountSize = (props, count, isTotalSize) => {
         if (!props.unlimitedSize) {
-          if (props?.numColumns === 2 && props?.itemData?.length > 0 && isTotalSize) {
+          if (props.numColumns === 2 && props.itemData.length > 0 && isTotalSize) {
             const index = count - 1;
             const offset = getItemOffset(props, index, this)
             const size = getItemSize(props, index, this) // T
-            const makeHeaderHeight = props?.makeHeaderHeight || 0;
+            const makeHeaderHeight = props.makeHeaderHeight || 0;
             return offset + size - makeHeaderHeight;
           }
-          return (props?.itemSize || 0) * count
+          return (props.itemSize || 0) * count
         }
         const { sizeList } = this.state
         const sizes = sizeList.slice(0, count)
@@ -487,22 +487,22 @@ export default function createListComponent({
       if (!isRecycler) return currentKey;
       const type = itemType(index, itemData);
       // 可复用keys
-      let typeArray = this.recyclerkeys?.[type] || [];
+      let typeArray = this.recyclerkeys[type] || [];
       /**************** case 1 当前index为新旧dom交集 ****************/
       let typeIndex = typeArray.findIndex((element, i) => {
-        return element?.index === index;
+        return element.index === index;
       })
       if (typeIndex > -1) {
-        currentKey = typeArray?.[typeIndex]?.key;
+        currentKey = typeArray[typeIndex].key;
         return currentKey;
       }
 
       /**************** case 2 当前index不为新旧dom交集 ****************/
       typeIndex = typeArray.findIndex((element, i) => {
-        return element?.index < this.startIndex || element?.index > this.stopIndex;
+        return element.index < this.startIndex || element.index > this.stopIndex;
       })
       if (typeIndex > -1) {
-        currentKey = typeArray?.[typeIndex]?.key;
+        currentKey = typeArray[typeIndex].key;
         typeArray.splice(typeIndex, 1, { key: currentKey, index });
         this.recyclerkeys = {
           ...this.recyclerkeys,
@@ -530,8 +530,8 @@ export default function createListComponent({
 
       let tempRecyclerkeys = {};
       for (let key in this.recyclerkeys) {
-        const typeArray = (this.recyclerkeys?.[key] || []).filter(item => {
-          return item?.index >= this.startIndex && item?.index <= this.stopIndex;
+        const typeArray = (this.recyclerkeys[key] || []).filter(item => {
+          return item.index >= this.startIndex && item.index <= this.stopIndex;
         })
         tempRecyclerkeys[key] = typeArray;
       }

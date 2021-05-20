@@ -49,6 +49,7 @@ const RecyclerList = React.forwardRef((props, ref) => {
     initialScrollOffset = 0,
     overscanCount = 1,
     numColumns = 1,
+    makeHeaderHeight = 0,
     isRecycler = true,
     ...rest
   } = props
@@ -62,6 +63,7 @@ const RecyclerList = React.forwardRef((props, ref) => {
     direction,
     initialScrollOffset,
     overscanCount,
+    makeHeaderHeight,
     numColumns,
     isRecycler
   })
