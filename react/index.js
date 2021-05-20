@@ -63,8 +63,8 @@ const RecyclerList = React.forwardRef((props, ref) => {
     direction,
     initialScrollOffset,
     overscanCount,
-    makeHeaderHeight,
     numColumns,
+    makeHeaderHeight,
     isRecycler
   })
 })

@@ -483,9 +483,9 @@ export default function createListComponent({
       // console.log("渲染开始")
       // console.log(this.recyclerkeys);
       const { isRecycler, itemKey, itemType } = this.props;
-      let currentKey = itemKey(index, itemData);
+      let currentKey = itemKey({ index, item: itemData[index] });
       if (!isRecycler) return currentKey;
-      const type = itemType(index, itemData);
+      const type = itemType({ index, item: itemData[index] });
       // 可复用keys
       let typeArray = this.recyclerkeys[type] || [];
       /**************** case 1 当前index为新旧dom交集 ****************/
